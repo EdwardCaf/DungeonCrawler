@@ -10,6 +10,7 @@ function enterDungeon() {
   consoleText.innerHTML = "You're in the dungeon. The floors are made of cobblestone and the air smells of mold. You are faced with two paths in front of you, which do you take?";
   // Add buttons
   addMovementButtons();
+  defaultMusic.play();
 }
 
 function attack() {

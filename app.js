@@ -1,7 +1,12 @@
 let remainingPoints = 15;
 let buttonVanish2 = document.getElementById('attack');
 let buttonVanish3 = document.getElementById('flee');
-
+const defaultMusic = document.getElementById('default-music');
+const battleMusic = document.getElementById('battle-music');
+const finishMusic = document.getElementById('finish-music');
+defaultMusic.volume = 0.3;
+battleMusic.volume = 0.3;
+finishMusic.volume = 0.3;
 
 
 let player = {
@@ -91,10 +96,13 @@ function adjustScroll() {
 }
 
 function resetStats() {
-  remainingPoints = document.getElementById('remaining-points').innerHTML = 20;
+  remainingPoints = document.getElementById('remaining-points').innerHTML = 15;
   health = document.getElementById('health').innerHTML = 0;
   strength = document.getElementById('strength').innerHTML = 0;
   speed = document.getElementById('speed').innerHTML = 0;
+  player.health = 0;
+  player.strength = 0;
+  player.speed = 0;
 }
 
 function removeElements() {
@@ -143,12 +151,24 @@ function enterStats() {
   }
 }
 
+function muteSound() {
+  if (defaultMusic.muted === true && battleMusic.muted === true && finishMusic.muted === true) {
+    defaultMusic.muted = false;
+    battleMusic.muted = false;
+    finishMusic.muted = false;
+  } else {
+    defaultMusic.muted = true;
+    battleMusic.muted = true;
+    finishMusic.muted = true;
+  }
+}
+
 function clearConsole() {
   consoleText.innerHTML = "";
 }
 
 function roomDifficulty() {
-  if (roomNumber > 3) {
+  if (roomNumber >= 4) {
     randomMonster2();
   } else {
     randomMonster1();
@@ -156,17 +176,29 @@ function roomDifficulty() {
 }
 
 function randomMonster1() {
-  let x = Math.floor(Math.random() * Math.floor(2)) + 1;
+  let x = Math.floor(Math.random() * Math.floor(4)) + 1;
   if (x === 1) {
     Goblin.appear();
   }
   if (x === 2) {
     GiantRat.appear();
   }
+  if (x === 3) {
+    Imp.appear();
+  }
+  if (x === 4) {
+    Bat.appear();
+  }
 }
 
 function randomMonster2() {
-  Jose.appear();
+  let x = Math.floor(Math.random() * Math.floor(2)) + 1;
+  if (x === 1) {
+    Troll.appear();
+  }
+  if (x === 2) {
+    Orc.appear();
+  }
 }
 
 function randomRoom() {
@@ -174,6 +206,9 @@ function randomRoom() {
   removeMovementButtons();
   roomIncrement();
   addCombatButtons();
+  defaultMusic.pause();
+  defaultMusic.currentTime = 0;
+  battleMusic.play();
 }
 
 function addMovementButtons() {
@@ -208,12 +243,17 @@ function continueButton() {
   if (roomNumber === roomLimit) {
     removeContinueButton();
     addGameOverButton();
-    consoleText.innerHTML = "Congratulations! You made it out of the dungeon!!"
+    consoleText.innerHTML = "Congratulations! You made it out of the dungeon!!";
+    battleMusic.pause();
+    finishMusic.play();
   } else {
     removeContinueButton();
     addMovementButtons();
     levelUp();
     consoleText.innerHTML = "Choose a path.";
+    battleMusic.pause();
+    battleMusic.currentTime = 0;
+    defaultMusic.play();
   }
 }
 
@@ -233,7 +273,7 @@ function addCombatButtons() {
   action1.appendChild(actionNode1);
   actionBarOptions.appendChild(action1);
   action1.id = 'attack';
-  action1.classList.add('btn', 'btn-info', 'col-sm-2', 'ml-5');
+  action1.classList.add('btn', 'btn-danger', 'col-sm-2', 'ml-5');
   action1.setAttribute("onclick", "attack();");
 
   let action2 = document.createElement('button');
@@ -241,7 +281,7 @@ function addCombatButtons() {
   action2.appendChild(actionNode2);
   actionBarOptions.appendChild(action2);
   action2.id = 'flee';
-  action2.classList.add('btn', 'btn-info', 'col-sm-2', 'mr-5');
+  action2.classList.add('btn', 'btn-success', 'col-sm-2', 'mr-5');
   action2.setAttribute("onclick", "flee();");
 }
 
@@ -257,11 +297,12 @@ function roomLimit() {
 function levelUp() {
   let healthUp = (Math.floor(Math.random() * 4) + 1);
   let strengthUp = (Math.floor(Math.random() * 2) + 1);
-  let speedUp = (Math.floor(Math.random() * 2) + 1);
 
   player.health += healthUp;
   player.strength += strengthUp;
-  player.speed += speedUp;
+  if (player.speed <= 13) {
+    player.speed++;
+  }
 
   document.getElementById('health').innerHTML = Math.floor(player.health);
   document.getElementById('strength').innerHTML = player.strength;

@@ -6,6 +6,10 @@
   height: 300px;
 }
 
+.console-clear {
+  max-width: 50%;
+}
+
 .enter-dungeon {
   display: none;
 }

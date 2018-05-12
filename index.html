@@ -35,7 +35,7 @@
             <button type="button" id="increment-speed" class="btn btn-primary p-1" onclick="raiseSpeed()">+</button>
           </li>
           <li class="d-flex justify-content-between list-group-item list-group-item-secondary align-items-center" id="remaining-points-parent">Remaining Points
-            <span id="remaining-points" class="text-right">20</span>
+            <span id="remaining-points" class="text-right">15</span>
           </li>
           <div class="input-group mt-2">
             <div id="user-name-pre" class="input-group-prepend">
@@ -45,13 +45,14 @@
           </div>
           <button type="button" id="reset-stat" class="btn btn-info pt-2 mt-2" onclick="resetStats()">Reset stats</button>
           <button type="button" id="enter-stat" class="btn btn-success pt-2 mt-2" onclick="enterStats()">Enter stats</button>
+          <button type="button" class="btn btn-warning pt-2 mt-2" onclick="muteSound()">Mute</button>
         </ul>
       </div>
       <div class="col-sm-8 text-center mx-auto mt-4 card card-body p-2 console-text-body">
         <h1>Console</h1>
         <div id="console" class="console-text" style="height:100%;overflow:auto;">
         </div>
-        <button type="button" class="btn btn-danger" onclick="clearConsole()">Clear</button>
+        <button type="button" class="btn btn-secondary" onclick="clearConsole()">Clear</button>
       </div>
       <div class="col-sm-8 text-center mx-auto mt-4 card card-body p-2" id="action-bar">
         <h1>Action Bar</h1>
@@ -64,6 +65,9 @@
   </div>
 
 </body>
+<audio src="default.mp3" id="default-music"></audio>
+<audio src="battle.mp3" id="battle-music"></audio>
+<audio src="finish.mp3" id="finish-music"></audio>
 <script src="enemies.js"></script>
 <script src="app.js"></script>
 <script src="action.js"></script>
