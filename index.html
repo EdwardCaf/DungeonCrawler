@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+
+<body class="bg-dark">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 text-center mx-auto mt-5 card card-body p-4">
+        <h1>Dungeon Crawler</h1>
+        <h3 id="room-number"></h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3 text-center mx-auto mt-4 card card-body p-2">
+        <h1>Stats</h1>
+        <ul class="list-group" id="stats">
+          <li class="d-flex justify-content-between list-group-item list-group-item-success align-items-center">Health
+            <span id="health" class="text-right"></span>
+            <button type="button" id="increment-health" class="btn btn-primary p-1" onclick="raiseHealth()">+</button>
+          </li>
+          <li class="d-flex justify-content-between list-group-item list-group-item-danger align-items-center">Strength
+            <span id="strength" class="text-right"></span>
+            <button type="button" id="increment-strength" class="btn btn-primary p-1" onclick="raiseStrength()">+</button>
+          </li>
+          <li class="d-flex justify-content-between list-group-item list-group-item-warning align-items-center">Speed
+            <span id="speed" class=""></span>
+            <button type="button" id="increment-speed" class="btn btn-primary p-1" onclick="raiseSpeed()">+</button>
+          </li>
+          <li class="d-flex justify-content-between list-group-item list-group-item-secondary align-items-center" id="remaining-points-parent">Remaining Points
+            <span id="remaining-points" class="text-right">20</span>
+          </li>
+          <div class="input-group mt-2">
+            <div id="user-name-pre" class="input-group-prepend">
+              <span class="input-group-text">Name</span>
+            </div>
+            <input id="user-name" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+          <button type="button" id="reset-stat" class="btn btn-info pt-2 mt-2" onclick="resetStats()">Reset stats</button>
+          <button type="button" id="enter-stat" class="btn btn-success pt-2 mt-2" onclick="enterStats()">Enter stats</button>
+        </ul>
+      </div>
+      <div class="col-sm-8 text-center mx-auto mt-4 card card-body p-2 console-text-body">
+        <h1>Console</h1>
+        <div id="console" class="console-text" style="height:100%;overflow:auto;">
+        </div>
+        <button type="button" class="btn btn-danger" onclick="clearConsole()">Clear</button>
+      </div>
+      <div class="col-sm-8 text-center mx-auto mt-4 card card-body p-2" id="action-bar">
+        <h1>Action Bar</h1>
+        <button id="enter-dungeon" type="button" class="btn btn-danger col-sm-4 mx-auto enter-dungeon" onclick="enterDungeon()">Enter Dungeon!</button>
+        <div class="row d-flex justify-content-between align-items-center" id="action-bar-options">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+<script src="enemies.js"></script>
+<script src="app.js"></script>
+<script src="action.js"></script>
+
+</html>

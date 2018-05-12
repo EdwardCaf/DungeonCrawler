@@ -1,0 +1,11 @@
+.console-text {
+  max-height: 300px;
+}
+
+.console-text-body {
+  height: 300px;
+}
+
+.enter-dungeon {
+  display: none;
+}
