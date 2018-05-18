@@ -1,6 +1,7 @@
-let remainingPoints = 15;
+let remainingPoints = 40;
 let buttonVanish2 = document.getElementById('attack');
 let buttonVanish3 = document.getElementById('flee');
+let exp;
 const defaultMusic = document.getElementById('default-music');
 const battleMusic = document.getElementById('battle-music');
 const finishMusic = document.getElementById('finish-music');
@@ -39,7 +40,8 @@ let enterStatsCheck = true;
 
 
 window.onload = function () {
-  roomLimit();
+  roomLimit(16, 12);
+  console.log(roomLimit);
   consoleText.innerHTML = "Greetings Adventurer! You must make your way out of the dungeon! Please assign your stats and keep in mind that your health stat will be multiplied by a factor of 2.5. You will level up after each floor and gain stat points at random. If your health reaches 0 then you lose the game. Strength is for damage and speed is for evading and fleeing.";
 }
 
@@ -73,9 +75,13 @@ function raiseSpeed() {
   if (remainingPoints === 0) {
     checkPointsRemaining();
     adjustScroll();
+  } else if (remainingPoints === 1) {
+    checkPointsRemaining();
+    adjustScroll();
   } else {
     // Add points
     player.speed++;
+    remainingPoints--;
     remainingPoints--;
     document.getElementById('remaining-points').innerHTML = remainingPoints;
     document.getElementById('speed').innerHTML = player.speed;
@@ -96,7 +102,7 @@ function adjustScroll() {
 }
 
 function resetStats() {
-  remainingPoints = document.getElementById('remaining-points').innerHTML = 15;
+  remainingPoints = document.getElementById('remaining-points').innerHTML = 35;
   health = document.getElementById('health').innerHTML = 0;
   strength = document.getElementById('strength').innerHTML = 0;
   speed = document.getElementById('speed').innerHTML = 0;
@@ -128,10 +134,11 @@ function removeElements() {
 function enterStats() {
   if (remainingPoints === 0 && enterStatsCheck) {
     player.health = player.health + 2;
-    player.health = player.health * 2.5;
+    player.health = player.health * 3.5;
     player.strength++;
     player.speed++;
 
+    player.name = document.getElementById('user-name').value;
     document.getElementById('health').innerHTML = Math.floor(player.health);
     document.getElementById('strength').innerHTML = player.strength;
     document.getElementById('speed').innerHTML = player.speed;
@@ -168,7 +175,11 @@ function clearConsole() {
 }
 
 function roomDifficulty() {
-  if (roomNumber >= 4) {
+  if (roomNumber === roomLimit) {
+    Dragon.appear();
+  } else if (roomNumber >= 8) {
+    randomMonster3();
+  } else if (roomNumber >= 4) {
     randomMonster2();
   } else {
     randomMonster1();
@@ -192,19 +203,41 @@ function randomMonster1() {
 }
 
 function randomMonster2() {
-  let x = Math.floor(Math.random() * Math.floor(2)) + 1;
+  let x = Math.floor(Math.random() * Math.floor(4)) + 1;
   if (x === 1) {
     Troll.appear();
   }
   if (x === 2) {
     Orc.appear();
   }
+  if (x === 3) {
+    Warlock.appear();
+  }
+  if (x === 4) {
+    Spider.appear();
+  }
+}
+
+function randomMonster3() {
+  let x = Math.floor(Math.random() * Math.floor(4)) + 1;
+  if (x === 1) {
+    Necromancer.appear();
+  }
+  if (x === 2) {
+    Hydra.appear();
+  }
+  if (x === 3) {
+    Banshee.appear();
+  }
+  if (x === 4) {
+    Basilisk.appear();
+  }
 }
 
 function randomRoom() {
+  roomIncrement();
   roomDifficulty();
   removeMovementButtons();
-  roomIncrement();
   addCombatButtons();
   defaultMusic.pause();
   defaultMusic.currentTime = 0;
@@ -249,12 +282,20 @@ function continueButton() {
   } else {
     removeContinueButton();
     addMovementButtons();
+    consoleText.innerHTML = "";
     levelUp();
-    consoleText.innerHTML = "Choose a path.";
+    roomDescription();
+    consoleText.innerHTML += "<br/>" + "Choose a path.";
     battleMusic.pause();
     battleMusic.currentTime = 0;
     defaultMusic.play();
   }
+}
+
+function roomDescription() {
+  let roomArrayIndex = randomNumber(3, 0);
+  consoleText.innerHTML += '<br/>';
+  consoleText.innerHTML += roomArray[roomArrayIndex];
 }
 
 function addGameOverButton() {
@@ -290,23 +331,27 @@ function roomIncrement() {
   document.getElementById('room-number').innerHTML = "Room " + roomNumber;
 }
 
-function roomLimit() {
-  roomLimit = (Math.floor(Math.random() * 8) + 6)
+function roomLimit(max, min) {
+  roomLimit = (Math.floor(Math.random() * (max - min + 1)) + min);
 }
 
 function levelUp() {
-  let healthUp = (Math.floor(Math.random() * 4) + 1);
-  let strengthUp = (Math.floor(Math.random() * 2) + 1);
+  if (exp) {
+    let healthUp = (Math.floor(Math.random() * 6) + 3);
+    let strengthUp = (Math.floor(Math.random() * 2) + 1);
 
-  player.health += healthUp;
-  player.strength += strengthUp;
-  if (player.speed <= 13) {
-    player.speed++;
+    player.health += healthUp;
+    player.strength += strengthUp;
+    if (player.speed <= 13) {
+      player.speed++;
+    }
+
+    document.getElementById('health').innerHTML = Math.floor(player.health);
+    document.getElementById('strength').innerHTML = player.strength;
+    document.getElementById('speed').innerHTML = player.speed;
+    consoleText.innerHTML += "You leveled up!!";
+    exp = false;
   }
-
-  document.getElementById('health').innerHTML = Math.floor(player.health);
-  document.getElementById('strength').innerHTML = player.strength;
-  document.getElementById('speed').innerHTML = player.speed;
 }
 
 function removeMovementButtons() {
@@ -319,4 +364,8 @@ function removeMovementButtons() {
 function removeContinueButton() {
   let buttonVanish2 = document.getElementById('action-continue');
   buttonVanish2.parentNode.removeChild(buttonVanish2);
+}
+
+function randomNumber(max, min) {
+  return (Math.floor(Math.random() * (max - min + 1)) + min);
 }

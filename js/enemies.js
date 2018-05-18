@@ -4,6 +4,7 @@ let enemy = {
   "strength": 0,
   "speed": 0,
 }
+
 let Goblin = {
   "name": "Goblin",
   "health": 14,
@@ -19,6 +20,7 @@ let Goblin = {
     consoleText.innerHTML += "<br/>" + "The " + this.name + " has " + this.health + " health, " + this.strength + " strength, and " + this.speed + " speed.";
   }
 }
+
 let GiantRat = {
   "name": "Giant Rat",
   "health": 19,
@@ -34,6 +36,7 @@ let GiantRat = {
     consoleText.innerHTML += "<br/>" + "The " + this.name + " has " + this.health + " health, " + this.strength + " strength, and " + this.speed + " speed.";
   }
 }
+
 let Bat = {
   "name": "Bat",
   "health": 17,
@@ -49,6 +52,7 @@ let Bat = {
     consoleText.innerHTML += "<br/>" + "The " + this.name + " has " + this.health + " health, " + this.strength + " strength, and " + this.speed + " speed.";
   }
 }
+
 let Imp = {
   "name": "Imp",
   "health": 14,
@@ -65,13 +69,11 @@ let Imp = {
   }
 }
 
-
-
 let Troll = {
   "name": "Troll",
   "health": 35,
   "strength": 9,
-  "speed": 6,
+  "speed": 7,
   appear: function () {
     enemy.name = this.name;
     enemy.health = this.health;
@@ -82,11 +84,12 @@ let Troll = {
     consoleText.innerHTML += "<br/>" + "The " + this.name + " has " + this.health + " health, " + this.strength + " strength, and " + this.speed + " speed.";
   }
 }
+
 let Orc = {
   "name": "Orc",
   "health": 28,
   "strength": 7,
-  "speed": 10,
+  "speed": 9,
   appear: function () {
     enemy.name = this.name;
     enemy.health = this.health;
@@ -94,6 +97,118 @@ let Orc = {
     enemy.speed = this.speed;
     enemy.attack = this.attack;
     consoleText.innerHTML = "A green creature with sharp tusks lets out a roar and charges at you with a sword and shield.";
+    consoleText.innerHTML += "<br/>" + "The " + this.name + " has " + this.health + " health, " + this.strength + " strength, and " + this.speed + " speed.";
+  }
+}
+
+let Spider = {
+  "name": "Giant Spider",
+  "health": 22,
+  "strength": 5,
+  "speed": 10,
+  appear: function () {
+    enemy.name = this.name;
+    enemy.health = this.health;
+    enemy.strength = this.strength;
+    enemy.speed = this.speed;
+    enemy.attack = this.attack;
+    consoleText.innerHTML = "A large spider crawls down from it's web.";
+    consoleText.innerHTML += "<br/>" + "The " + this.name + " has " + this.health + " health, " + this.strength + " strength, and " + this.speed + " speed.";
+  }
+}
+
+let Warlock = {
+  "name": "Warlock",
+  "health": 25,
+  "strength": 9,
+  "speed": 6,
+  appear: function () {
+    enemy.name = this.name;
+    enemy.health = this.health;
+    enemy.strength = this.strength;
+    enemy.speed = this.speed;
+    enemy.attack = this.attack;
+    consoleText.innerHTML = "A magical entity raises it's staff imbued with dark magic and prepares itself for a fight";
+    consoleText.innerHTML += "<br/>" + "The " + this.name + " has " + this.health + " health, " + this.strength + " strength, and " + this.speed + " speed.";
+  }
+}
+
+let Necromancer = {
+  "name": "Necromancer",
+  "health": 33,
+  "strength": 9,
+  "speed": 11,
+  appear: function () {
+    enemy.name = this.name;
+    enemy.health = this.health;
+    enemy.strength = this.strength;
+    enemy.speed = this.speed;
+    enemy.attack = this.attack;
+    consoleText.innerHTML = "The Necromancer calls upon the dead to aid itself, boney arms rise from the earth beneath you.";
+    consoleText.innerHTML += "<br/>" + "The " + this.name + " has " + this.health + " health, " + this.strength + " strength, and " + this.speed + " speed.";
+  }
+}
+
+let Banshee = {
+  "name": "Banshee",
+  "health": 30,
+  "strength": 12,
+  "speed": 12,
+  appear: function () {
+    enemy.name = this.name;
+    enemy.health = this.health;
+    enemy.strength = this.strength;
+    enemy.speed = this.speed;
+    enemy.attack = this.attack;
+    consoleText.innerHTML = "A piercing scream deafens you. Your ears begin to bleed and the Banshee come towards you.";
+    consoleText.innerHTML += "<br/>" + "The " + this.name + " has " + this.health + " health, " + this.strength + " strength, and " + this.speed + " speed.";
+  }
+}
+
+let Hydra = {
+  "name": "Hydra",
+  "health": 41,
+  "strength": 11,
+  "speed": 13,
+  appear: function () {
+    enemy.name = this.name;
+    enemy.health = this.health;
+    enemy.strength = this.strength;
+    enemy.speed = this.speed;
+    enemy.attack = this.attack;
+    consoleText.innerHTML = "Three heads stare at you from across a room littered with corpses.";
+    consoleText.innerHTML += "<br/>" + "The " + this.name + " has " + this.health + " health, " + this.strength + " strength, and " + this.speed + " speed.";
+  }
+}
+
+let Basilisk = {
+  "name": "Basilisk",
+  "health": 45,
+  "strength": 14,
+  "speed": 10,
+  appear: function () {
+    enemy.name = this.name;
+    enemy.health = this.health;
+    enemy.strength = this.strength;
+    enemy.speed = this.speed;
+    enemy.attack = this.attack;
+    consoleText.innerHTML = "An enormous snake slithers throughout the room in front of you.";
+    consoleText.innerHTML += "<br/>" + "The " + this.name + " has " + this.health + " health, " + this.strength + " strength, and " + this.speed + " speed.";
+  }
+}
+
+let Dragon = {
+  "name": "Dragon",
+  "health": 55,
+  "strength": 14,
+  "speed": 19,
+  appear: function () {
+    enemy.name = this.name;
+    enemy.health = this.health;
+    enemy.strength = this.strength;
+    enemy.speed = this.speed;
+    enemy.attack = this.attack;
+    consoleText.innerHTML = "A dragon roars and breathes flames. Only the strongest warrior might defeat it";
     consoleText.innerHTML += "<br/>" + "The " + this.name + " has " + this.health + " health, " + this.strength + " strength, and " + this.speed + " speed.";
   }
 }

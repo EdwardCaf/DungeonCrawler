@@ -36,7 +36,7 @@ function playerFirstCombat() {
     } else {
       consoleText.innerHTML += "<br/>" + "The " + enemy.name + " attacks and does " + damageRoll + " damage.";
       player.health = player.health - damageRoll;
-      if (player.health <= 0) {
+      if (player.health < 1) {
         let buttonVanish2 = document.getElementById('attack');
         buttonVanish2.parentNode.removeChild(buttonVanish2);
         let buttonVanish3 = document.getElementById('flee');
@@ -57,6 +57,7 @@ function playerFirstCombat() {
       let buttonVanish3 = document.getElementById('flee');
       buttonVanish3.parentNode.removeChild(buttonVanish3);
       consoleText.innerHTML += "<br/> You killed the " + enemy.name + "!";
+      exp = true;
       addContinueButton();
     } else {
       consoleText.innerHTML += "<br/>" + enemy.name + " has " + enemy.health + " health.";
@@ -68,7 +69,7 @@ function playerFirstCombat() {
       } else {
         consoleText.innerHTML += "<br/>" + "The " + enemy.name + " attacks and does " + damageRoll + " damage.";
         player.health = player.health - damageRoll;
-        if (player.health <= 0) {
+        if (player.health < 1) {
           let buttonVanish2 = document.getElementById('attack');
           buttonVanish2.parentNode.removeChild(buttonVanish2);
           let buttonVanish3 = document.getElementById('flee');
@@ -105,6 +106,7 @@ function playerSecondCombat() {
         let buttonVanish3 = document.getElementById('flee');
         buttonVanish3.parentNode.removeChild(buttonVanish3);
         consoleText.innerHTML += "<br/> You killed the " + enemy.name + "!";
+        exp = true;
         addContinueButton();
       } else {
         consoleText.innerHTML += "<br/>" + enemy.name + " has " + enemy.health + " health.";
@@ -113,7 +115,7 @@ function playerSecondCombat() {
   } else {
     consoleText.innerHTML += "<br/>" + "The " + enemy.name + " attacks and does " + damageRoll + " damage.";
     player.health = player.health - damageRoll;
-    if (player.health <= 0) {
+    if (player.health < 1) {
       let buttonVanish2 = document.getElementById('attack');
       buttonVanish2.parentNode.removeChild(buttonVanish2);
       let buttonVanish3 = document.getElementById('flee');
@@ -137,6 +139,7 @@ function playerSecondCombat() {
           let buttonVanish3 = document.getElementById('flee');
           buttonVanish3.parentNode.removeChild(buttonVanish3);
           consoleText.innerHTML += "<br/> You killed the " + enemy.name + "!";
+          exp = true;
           addContinueButton();
         } else {
           consoleText.innerHTML += "<br/>" + enemy.name + " has " + enemy.health + " health.";
@@ -178,6 +181,8 @@ function flee() {
     let buttonVanish3 = document.getElementById('flee');
     buttonVanish3.parentNode.removeChild(buttonVanish3);
     consoleText.innerHTML += "<br/>" + player.name + " has gotten away!";
+    player.health += 4;
+    document.getElementById('health').innerHTML = Math.floor(player.health);
     addContinueButton();
   }
   adjustScroll();
